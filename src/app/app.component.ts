@@ -9,6 +9,8 @@ import { MarkerService } from './services/marker.service';
 
 
 
+
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -53,10 +55,10 @@ export class AppComponent implements OnInit {
                 autocomplete.addListener("place_changed", () => {
                     this.ngZone.run(() => {
                         let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-                        console.log(place);
-                        console.log(place.formatted_address);
-                        console.log(place.geometry);
-                        console.log(place.geometry.location.lat());
+                        // console.log(place);
+                        // console.log(place.formatted_address);
+                        // console.log(place.geometry);
+                        // console.log(place.geometry.location.lat());
                         //verify result
                         if (place.geometry === undefined || place.geometry === null) {
                             return;
