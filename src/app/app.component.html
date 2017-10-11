@@ -1,20 +1,50 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">{{ title }}</a>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <agm-map [latitude]="31.554606099999994" [scrollwheel]="false" [longitude]="74.3571581" [zoom]="z" [disableDefaultUI]="false" [zoomControl]="false" (mapClick)="mapClicked($event)">
+        <agm-marker *ngFor="let m of markers; let i = index" (dragEnd)="markerDragEnd(m, $event)" (markerClick)="clickedMarker(m,i)" [markerDraggable]="m.draggable" [latitude]="m.lat" [longitude]="m.lng">
+            <agm-info-window>
+                <strong>{{m.name}}</strong><br>
+                <a class="delete" (click)="deleteMarker(m)">Delete</a>
+            </agm-info-window>
+        </agm-marker>
+    </agm-map>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Add New Marker</h3>
+        </div>
+        <div class="panel-body">
+            <form (submit)="addMarker()">
+                <label>Location Name:</label>
+                <input type="text" [(ngModel)]="markerName" name="markerName">
+                <label>Latitude:</label>
+                <input type="text" [(ngModel)]="markerLat" name="markerLat">
+                <label>longitude:</label>
+                <input type="text" [(ngModel)]="markerLng" name="markerLng">
+                <label>Draggable:</label>
+                <select [(ngModel)]="markerDraggable" name="markerDraggable">
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+                <input type="submit" value="Map it!">
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container searchMap">
+    <h1>Angular 2 + Google Maps Places Autocomplete</h1>
+    <div class="form-group">
+        <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search>
+    </div>
+    <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+        <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+    </agm-map>
+</div>

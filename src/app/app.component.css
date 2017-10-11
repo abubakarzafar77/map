@@ -1,0 +1,11 @@
+agm-map {
+    height: 300px;
+}
+.searchMap {
+    width: 600px;
+    margin: 0 auto;
+}
+.searchMap agm-map {
+    height: 300px;
+    width: 600px;
+}
